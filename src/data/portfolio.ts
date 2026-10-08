@@ -47,8 +47,9 @@ export const projects = [
 ];
 
 export const timeline = [
-  { kind: "edu", role: "B.Tech in Information Technology", org: "Acropolis Institute of Technology and Research", date: "2023 — 2027" },
-  { kind: "edu", role: "Higher Secondary", org: "St. Joseph's Convent Hr. Sec School", date: "72.6%" },
+  { kind: "edu", role: "B.Tech in Information Technology", org: "Acropolis Institute of Technology and Research", date: "2023 — 2027  ·  CGPA 76.5" },
+  { kind: "edu", role: "Higher Secondary (Class 12)", org: "St. Joseph's Convent Hr. Sec School", date: "72.6%" },
+  { kind: "edu", role: "Class 10", org: "St. Joseph's Convent Hr. Sec School", date: "85.2%" },
 ];
 
 export const achievements = [
