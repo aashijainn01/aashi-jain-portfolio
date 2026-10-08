@@ -1,8 +1,8 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=7c3aed&height=200&section=header&text=Aashi%20Jain%20-%20Interactive%20Portfolio&fontSize=40&animation=fadeIn&fontAlignY=38&desc=Ultra-Premium%20Developer%20Portfolio&descAlignY=55&descAlign=50" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=7c3aed&height=200&section=header&text=Aashi%20Jain%20-%20Interactive%20Portfolio&fontSize=40&animation=fadeIn&fontAlignY=38&desc=Interactive%20Developer%20Portfolio&descAlignY=55&descAlign=50" />
 </div>
 
-<h3 align="center">A hyper-interactive, premium personal portfolio showcasing backend and AI integrations.</h3>
+<h3 align="center">A hyper-interactive personal portfolio showcasing backend and AI integrations.</h3>
 
 <div align="center">
   
