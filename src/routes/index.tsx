@@ -1,24 +1,46 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { BackToTop, Cursor, Konami, Navbar, Preloader, ScrollProgress, SocialRail } from "@/components/portfolio/Chrome";
+import { About, Contact, Footer, Hero, Journey, Projects, Skills, Testimonials } from "@/components/portfolio/Sections";
+import { useRevealAll } from "@/components/portfolio/hooks";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Alex Morgan — Full Stack Developer & UI Engineer";
+const description = "Portfolio of Alex Morgan, a San Francisco full stack developer crafting digital experiences at the intersection of logic and design.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  useRevealAll();
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <Preloader />
+      <ScrollProgress />
+      <Cursor />
+      <Konami />
+      <Navbar />
+      <SocialRail />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Journey />
+        <Testimonials />
+        <Contact />
+      </main>
+      <Footer />
+      <BackToTop />
+    </>
   );
 }
