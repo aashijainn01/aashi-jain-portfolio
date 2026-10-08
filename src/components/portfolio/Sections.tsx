@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type MouseEvent, type ReactNode } from "react";
 import * as Lucide from "lucide-react";
-import { ArrowDown, Award, Download, ExternalLink, Loader2, Mail, Phone, Send, Briefcase, GraduationCap } from "lucide-react";
+import { ArrowDown, Award, Download, ExternalLink, Loader2, Mail, Send, Briefcase, GraduationCap } from "lucide-react";
 import { categories, profile, projects, skills, stats, tech, timeline, bio, achievements } from "@/data/portfolio";
 import { useInView } from "./hooks";
 import { GithubIcon, LinkedinIcon } from "./icons";
@@ -271,7 +271,6 @@ export function Contact() {
   const [state, setState] = useState<"idle" | "sending" | "sent">("idle");
   const info = [
     { Icon: Mail, label: "Email", value: profile.email, href: `mailto:${profile.email}` },
-    { Icon: Phone, label: "Phone", value: profile.phone, href: `tel:${profile.phone}` },
     { Icon: LinkedinIcon, label: "LinkedIn", value: "/in/aashi-jain-b2500a329", href: profile.linkedin },
     { Icon: GithubIcon, label: "GitHub", value: "/aashijainn01", href: profile.github },
       ];
