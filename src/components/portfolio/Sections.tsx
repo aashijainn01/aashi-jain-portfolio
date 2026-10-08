@@ -114,7 +114,7 @@ export function About() {
             <span className="font-display text-8xl font-bold text-gradient">{profile.initials}</span>
           </div>
           <div className="animate-float glass absolute -bottom-8 -left-6 w-64 rounded-xl p-4 font-mono text-xs shadow-glow">
-            <div className="mb-3 flex gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-coral" /><span className="h-2.5 w-2.5 rounded-full bg-chart-4 bg-success/60" /><span className="h-2.5 w-2.5 rounded-full bg-success" /></div>
+            <div className="mb-3 flex gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-coral" /><span className="h-2.5 w-2.5 rounded-full bg-cyan" /><span className="h-2.5 w-2.5 rounded-full bg-success" /></div>
             <p><span className="text-primary">const</span> alex = {"{"}</p>
             <p className="pl-4">loves: <span className="text-cyan">"clean code"</span>,</p>
             <p className="pl-4">coffee: <span className="text-coral">Infinity</span>,</p>
