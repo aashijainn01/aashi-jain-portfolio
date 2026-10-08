@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUp, Mail, Menu, Moon, Sun, X } from "lucide-react";
 import { nav, profile } from "@/data/portfolio";
-import { GithubIcon, LinkedinIcon, XIcon } from "./icons";
+import { GithubIcon, LinkedinIcon } from "./icons";
 
 export function Preloader() {
   const [state, setState] = useState<"show" | "fade" | "gone">("show");
@@ -128,7 +128,6 @@ export function Navbar() {
 export const socials = [
   { href: profile.github, label: "GitHub", Icon: GithubIcon },
   { href: profile.linkedin, label: "LinkedIn", Icon: LinkedinIcon },
-  { href: profile.twitter, label: "Twitter / X", Icon: XIcon },
   { href: `mailto:${profile.email}`, label: "Email", Icon: Mail },
 ];
 

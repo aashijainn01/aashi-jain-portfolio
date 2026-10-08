@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState, type MouseEvent, type ReactNode } from "react";
 import * as Lucide from "lucide-react";
-import { ArrowDown, ChevronLeft, ChevronRight, Clock, Download, ExternalLink, Loader2, Mail, MapPin, Quote, Send, Star, Briefcase, GraduationCap } from "lucide-react";
-import { categories, profile, projects, skills, stats, tech, testimonials, timeline } from "@/data/portfolio";
+import { ArrowDown, Award, Download, ExternalLink, Loader2, Mail, Phone, Send, Briefcase, GraduationCap } from "lucide-react";
+import { categories, profile, projects, skills, stats, tech, timeline, bio, achievements } from "@/data/portfolio";
 import { useInView } from "./hooks";
-import { GithubIcon } from "./icons";
+import { GithubIcon, LinkedinIcon } from "./icons";
 import { socials } from "./Chrome";
 
 function Label({ children }: { children: ReactNode }) {
@@ -50,9 +50,9 @@ export function Hero() {
         <p className="animate-rise mt-8 h-10 font-display text-2xl font-medium sm:text-3xl" style={{ animationDelay: "2.6s" }}><RoleCycler /></p>
         <p className="animate-rise mt-4 max-w-xl text-lg text-muted-foreground" style={{ animationDelay: "2.7s" }}>{profile.tagline}</p>
         <div className="animate-rise mt-10 flex flex-wrap gap-4" style={{ animationDelay: "2.8s" }}>
-          <a href="#projects" className="rounded-full bg-primary px-8 py-4 font-medium text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-glow">View My Work</a>
+          <a href="#projects" className="rounded-full bg-primary px-8 py-4 font-medium text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-glow">View My Projects</a>
           <a href={profile.cv} className="shimmer inline-flex items-center gap-2 rounded-full border border-primary/50 px-8 py-4 font-medium transition-all duration-300 hover:scale-105 hover:border-cyan">
-            <Download className="h-4 w-4" /> Download CV
+            <Download className="h-4 w-4" /> Download Resume
           </a>
         </div>
       </div>
@@ -93,16 +93,14 @@ export function About() {
     <section id="about" className="relative mx-auto max-w-7xl px-6 py-32 md:pl-24">
       <div className="reveal absolute right-6 top-20 flex items-center gap-2 rounded-full border px-4 py-2 font-mono text-xs">
         <span className="relative flex h-2 w-2"><span className="absolute h-full w-full animate-ping rounded-full bg-success opacity-75" /><span className="relative h-2 w-2 rounded-full bg-success" /></span>
-        Available for freelance
+        Available for opportunities
       </div>
       <div className="grid items-center gap-16 lg:grid-cols-[1.2fr_1fr]">
         <div>
           <Label>about me</Label>
-          <h2 className="reveal text-4xl font-bold sm:text-5xl">More than just a <span className="text-gradient">developer.</span></h2>
+          <h2 className="reveal text-4xl font-bold sm:text-5xl">More than just a <span className="text-gradient">backend developer.</span></h2>
           <div className="reveal mt-8 space-y-4 text-lg leading-relaxed text-muted-foreground">
-            <p>I'm a full stack engineer based in San Francisco who fell in love with the web after building a terrible fan site at age 13. A decade later, I still get the same rush when an idea becomes something people can touch.</p>
-            <p>These days I partner with startups and product teams to design and ship fast, accessible, delightful software — from the database schema to the last micro-interaction.</p>
-            <p>When I'm not coding you'll find me contributing to open source, sketching UI ideas in Figma, or hunting down the city's best pour-over.</p>
+            <p>{bio}</p>
           </div>
           <div className="reveal mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {stats.map((s) => <Counter key={s.label} {...s} />)}
@@ -116,7 +114,7 @@ export function About() {
           <div className="animate-float glass absolute -bottom-8 -left-6 w-64 rounded-xl p-4 font-mono text-xs shadow-glow">
             <div className="mb-3 flex gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-coral" /><span className="h-2.5 w-2.5 rounded-full bg-cyan" /><span className="h-2.5 w-2.5 rounded-full bg-success" /></div>
             <p><span className="text-primary">const</span> alex = {"{"}</p>
-            <p className="pl-4">loves: <span className="text-cyan">"clean code"</span>,</p>
+            <p className="pl-4">loves: <span className="text-cyan">"Spring Boot"</span>,</p>
             <p className="pl-4">coffee: <span className="text-coral">Infinity</span>,</p>
             <p className="pl-4">hireable: <span className="text-success">true</span></p>
             <p>{"}"};</p>
@@ -147,14 +145,9 @@ function SkillCard({ s, i }: { s: (typeof skills)[number]; i: number }) {
         <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-primary"><Icon className="h-5 w-5" /></span>
         <h3 className="text-xl font-semibold">{s.name}</h3>
       </div>
-      <ul className="mt-6 space-y-4">
-        {s.items.map(([name, pct]) => (
-          <li key={name}>
-            <div className="mb-1.5 flex justify-between text-sm"><span>{name}</span><span className="font-mono text-muted-foreground">{pct}%</span></div>
-            <div className="h-1.5 overflow-hidden rounded-full bg-muted">
-              <div className="h-full rounded-full bg-brand transition-[width] duration-[1400ms] ease-out" style={{ width: inView ? `${pct}%` : "0%" }} />
-            </div>
-          </li>
+      <ul className="mt-6 flex flex-wrap gap-2">
+        {s.items.map((name, k) => (
+          <li key={name} className={`rounded-full border px-3 py-1.5 font-mono text-xs transition-all duration-500 hover:border-primary hover:text-primary ${inView ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"}`} style={{ transitionDelay: `${k * 60}ms` }}>{name}</li>
         ))}
       </ul>
     </div>
@@ -189,7 +182,7 @@ function ProjectCard({ p }: { p: (typeof projects)[number] }) {
           <div className="flex gap-1.5 p-3"><span className="h-2 w-2 rounded-full bg-foreground/40" /><span className="h-2 w-2 rounded-full bg-foreground/40" /><span className="h-2 w-2 rounded-full bg-foreground/40" /></div>
           <div className="space-y-2 px-4"><div className="h-3 w-1/2 rounded bg-foreground/30" /><div className="h-2 w-3/4 rounded bg-foreground/15" /><div className="grid grid-cols-3 gap-2 pt-2"><div className="h-12 rounded bg-foreground/10" /><div className="h-12 rounded bg-foreground/10" /><div className="h-12 rounded bg-foreground/10" /></div></div>
         </div>
-        <span className="absolute left-4 top-4 rounded-full bg-background/60 px-3 py-1 font-mono text-xs backdrop-blur">{p.cat}</span>
+        <span className="absolute left-4 top-4 rounded-full bg-background/60 px-3 py-1 font-mono text-xs backdrop-blur">{p.cats[0]}</span>
         {p.featured && <span className="absolute right-4 top-4 rounded-full bg-coral px-3 py-1 font-mono text-xs text-primary-foreground">Featured</span>}
       </div>
       <div className="p-7">
@@ -207,7 +200,7 @@ function ProjectCard({ p }: { p: (typeof projects)[number] }) {
 
 export function Projects() {
   const [cat, setCat] = useState<(typeof categories)[number]>("All");
-  const list = useMemo(() => (cat === "All" ? projects : projects.filter((p) => p.cat === cat)), [cat]);
+  const list = useMemo(() => (cat === "All" ? projects : projects.filter((p) => (p.cats as readonly string[]).includes(cat))), [cat]);
   return (
     <section id="projects" className="mx-auto max-w-7xl px-6 py-32 md:pl-24">
       <Label>selected work</Label>
@@ -229,8 +222,8 @@ export function Projects() {
 export function Journey() {
   return (
     <section id="journey" className="mx-auto max-w-6xl px-6 py-32 md:pl-24">
-      <Label>journey</Label>
-      <h2 className="reveal text-4xl font-bold sm:text-5xl">Where I've <span className="text-gradient">been.</span></h2>
+      <Label>journey & credentials</Label>
+      <h2 className="reveal text-4xl font-bold sm:text-5xl">Journey & <span className="text-gradient">credentials.</span></h2>
       <div className="relative mt-16">
         <div className="absolute bottom-0 left-5 top-0 w-px bg-gradient-to-b from-primary via-cyan to-transparent md:left-1/2" aria-hidden />
         <ol className="space-y-12">
@@ -244,53 +237,20 @@ export function Journey() {
                   <p className="font-mono text-xs text-cyan">{e.date}</p>
                   <h3 className="mt-2 text-xl font-bold">{e.role}</h3>
                   <p className="text-muted-foreground">{e.org}</p>
-                  <ul className="mt-4 space-y-1.5 text-sm text-muted-foreground">{e.points.map((pt) => <li key={pt} className="flex gap-2"><span className="text-primary">▹</span>{pt}</li>)}</ul>
-                  <div className="mt-4 flex flex-wrap gap-2">{e.tags.map((t) => <span key={t} className="rounded-full bg-accent px-3 py-1 font-mono text-xs">{t}</span>)}</div>
                 </div>
               </li>
             );
           })}
         </ol>
       </div>
-    </section>
-  );
-}
-
-/* ---------------- TESTIMONIALS ---------------- */
-export function Testimonials() {
-  const [i, setI] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const n = testimonials.length;
-  useEffect(() => {
-    if (paused) return;
-    const t = setInterval(() => setI((v) => (v + 1) % n), 5500);
-    return () => clearInterval(t);
-  }, [paused, n]);
-  return (
-    <section id="testimonials" className="mx-auto max-w-4xl px-6 py-32 text-center">
-      <Label>what they say</Label>
-      <h2 className="reveal text-4xl font-bold sm:text-5xl">Kind <span className="text-gradient">words.</span></h2>
-      <div className="reveal relative mt-14 overflow-hidden" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-        <div className="flex transition-transform duration-700 [transition-timing-function:var(--ease)]" style={{ transform: `translateX(-${i * 100}%)` }}>
-          {testimonials.map((t) => (
-            <figure key={t.name} className="w-full shrink-0 px-2">
-              <div className="glass relative rounded-3xl p-10 sm:p-14">
-                <Quote className="absolute left-8 top-8 h-12 w-12 text-primary/40" />
-                <div className="mb-6 flex justify-center gap-1">{Array.from({ length: 5 }).map((_, k) => <Star key={k} className="h-4 w-4 fill-current text-coral" />)}</div>
-                <blockquote className="text-xl leading-relaxed sm:text-2xl">"{t.text}"</blockquote>
-                <figcaption className="mt-8 flex items-center justify-center gap-4">
-                  <span className="grid h-12 w-12 place-items-center rounded-full bg-brand font-bold text-primary-foreground">{t.name.split(" ").map((w) => w[0]).join("")}</span>
-                  <span className="text-left"><span className="block font-semibold">{t.name}</span><span className="text-sm text-muted-foreground">{t.role}, {t.company}</span></span>
-                </figcaption>
-              </div>
-            </figure>
-          ))}
-        </div>
-      </div>
-      <div className="mt-8 flex items-center justify-center gap-6">
-        <button onClick={() => setI((i - 1 + n) % n)} aria-label="Previous testimonial" className="grid h-11 w-11 place-items-center rounded-full border transition-all hover:shadow-glow"><ChevronLeft className="h-5 w-5" /></button>
-        <div className="flex gap-2">{testimonials.map((_, k) => <button key={k} onClick={() => setI(k)} aria-label={`Testimonial ${k + 1}`} className={`h-2 rounded-full transition-all duration-500 ${k === i ? "w-8 bg-brand" : "w-2 bg-muted-foreground/40"}`} />)}</div>
-        <button onClick={() => setI((i + 1) % n)} aria-label="Next testimonial" className="grid h-11 w-11 place-items-center rounded-full border transition-all hover:shadow-glow"><ChevronRight className="h-5 w-5" /></button>
+      <h3 className="reveal mt-24 text-2xl font-bold">Achievements & Certifications</h3>
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {achievements.map((a, k) => (
+          <div key={a} className="reveal glass flex items-start gap-4 rounded-2xl p-5 transition-all duration-500 hover:-translate-y-1 hover:shadow-glow" style={{ transitionDelay: `${k * 60}ms` }}>
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand text-primary-foreground"><Award className="h-5 w-5" /></span>
+            <p className="text-sm leading-relaxed">{a}</p>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -311,9 +271,10 @@ export function Contact() {
   const [state, setState] = useState<"idle" | "sending" | "sent">("idle");
   const info = [
     { Icon: Mail, label: "Email", value: profile.email, href: `mailto:${profile.email}` },
-    { Icon: MapPin, label: "Location", value: profile.location },
-    { Icon: Clock, label: "Availability", value: "Open for new projects" },
-  ];
+    { Icon: Phone, label: "Phone", value: profile.phone, href: `tel:${profile.phone}` },
+    { Icon: LinkedinIcon, label: "LinkedIn", value: "/in/aashi-jain-b2500a329", href: profile.linkedin },
+    { Icon: GithubIcon, label: "GitHub", value: "/aashijainn01", href: profile.github },
+      ];
   return (
     <section id="contact" className="relative mx-auto max-w-7xl px-6 py-32 md:pl-24">
       <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand opacity-20 blur-[120px]" aria-hidden />
@@ -356,7 +317,7 @@ export function Footer() {
         <nav className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
           {["about", "projects", "contact"].map((id) => <a key={id} href={`#${id}`} className="link-underline capitalize hover:text-foreground">{id}</a>)}
         </nav>
-        <p className="text-sm text-muted-foreground">Built with ❤️ and ☕</p>
+        <p className="text-sm text-muted-foreground">Built with ❤️ by Aashi Jain</p>
       </div>
     </footer>
   );

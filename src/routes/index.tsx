@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BackToTop, Cursor, Konami, Navbar, Preloader, ScrollProgress, SocialRail } from "@/components/portfolio/Chrome";
-import { About, Contact, Footer, Hero, Journey, Projects, Skills, Testimonials } from "@/components/portfolio/Sections";
+import { About, Contact, Footer, Hero, Journey, Projects, Skills } from "@/components/portfolio/Sections";
 import { useRevealAll } from "@/components/portfolio/hooks";
 
-const title = "Alex Morgan — Full Stack Developer & UI Engineer";
-const description = "Portfolio of Alex Morgan, a San Francisco full stack developer crafting digital experiences at the intersection of logic and design.";
+const title = "Aashi Jain — Java Backend Developer";
+const description = "Portfolio of Aashi Jain, a Java & Spring Boot backend developer building efficient, scalable, AI-driven solutions.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,7 +36,6 @@ function Index() {
         <Skills />
         <Projects />
         <Journey />
-        <Testimonials />
         <Contact />
       </main>
       <Footer />
