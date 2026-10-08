@@ -160,9 +160,9 @@ export function Navbar() {
         <div className={`mx-auto flex max-w-6xl items-center justify-between rounded-full px-5 py-2 transition-all duration-500 ${scrolled ? "glass mx-4 md:mx-auto" : ""}`}>
           <a href="#home" className="font-display text-xl font-bold"><span className="text-gradient-2">{profile.initials}</span><span className="text-primary">.</span></a>
           <nav className="hidden items-center gap-8 md:flex">
-            {nav.map((n, k) => (
+            {nav.map((n) => (
               <a key={n} href={`#${n}`} data-active={active === n} className="link-underline font-mono text-sm capitalize text-muted-foreground transition-colors hover:text-foreground data-[active=true]:text-foreground">
-                <span className="text-primary">0{k + 1}.</span> {n}
+                {n}
               </a>
             ))}
           </nav>
@@ -178,7 +178,7 @@ export function Navbar() {
           <nav className="mt-16 flex flex-col gap-6">
             {nav.map((n, k) => (
               <a key={n} href={`#${n}`} onClick={() => setOpen(false)} className="animate-rise font-display text-4xl font-bold capitalize" style={{ animationDelay: `${k * 80}ms` }}>
-                <span className="font-mono text-base text-primary">0{k + 1}.</span> {n}
+                {n}
               </a>
             ))}
           </nav>
