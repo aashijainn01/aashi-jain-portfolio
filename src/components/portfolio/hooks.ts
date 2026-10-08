@@ -16,7 +16,7 @@ export function useInView<T extends Element>(threshold = 0.3) {
 /** Adds `.in` to every `.reveal*` element once visible (including ones added later). */
 export function useRevealAll() {
   useEffect(() => {
-    const sel = ".reveal:not(.in), .reveal-left:not(.in), .reveal-right:not(.in)";
+    const sel = ".reveal:not(.in), .reveal-left:not(.in), .reveal-right:not(.in), .reveal-3d:not(.in)";
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => { if (e?.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
     }, { threshold: 0.05 });

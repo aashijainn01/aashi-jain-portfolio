@@ -415,9 +415,9 @@ export function Contact() {
     { href: profile.github, label: "github.com/aashijainn01", Icon: GithubIcon },
   ];
   return (
-    <section id="contact" className="relative overflow-hidden px-6 py-32 md:pl-24">
+    <section id="contact" className="relative overflow-hidden py-32">
       <div className="pointer-events-none absolute left-1/2 top-1/2 -ml-[300px] -mt-[300px] h-[600px] w-[600px] animate-blob bg-primary/25 blur-[100px]" aria-hidden />
-      <div className="relative mx-auto max-w-6xl">
+      <div className="relative mx-auto max-w-6xl px-6 md:pl-24">
         <Label>// open_portal</Label>
         <Words text="Let's Build Something Amazing Together" className="max-w-3xl font-display text-4xl font-bold leading-tight sm:text-5xl" />
         <div className="mt-14 grid gap-8 lg:grid-cols-2">
