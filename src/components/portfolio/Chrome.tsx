@@ -178,7 +178,7 @@ export function Navbar() {
           <nav className="mt-16 flex flex-col gap-6">
             {nav.map((n, k) => (
               <a key={n} href={`#${n}`} onClick={() => setOpen(false)} className="animate-rise font-display text-4xl font-bold capitalize" style={{ animationDelay: `${k * 80}ms` }}>
-                <span className="font-mono text-base text-primary">0{k + 1}.</span> {n}
+                {n}
               </a>
             ))}
           </nav>
