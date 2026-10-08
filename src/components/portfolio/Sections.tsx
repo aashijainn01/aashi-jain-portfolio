@@ -125,7 +125,7 @@ export function Hero() {
         <div className="blueprint absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
       </div>
       <Particles />
-      <div className="relative mx-auto grid w-full max-w-6xl items-center gap-14 px-6 md:pl-24 lg:grid-cols-[3fr_2fr]">
+      <div className="relative mx-auto grid w-full max-w-6xl items-center gap-14 px-6 md:pl-24 grid-cols-1 lg:grid-cols-[3fr_2fr] [&>*]:min-w-0">
         <div>
           <p className="animate-rise font-mono text-sm text-accent2 [animation-delay:2.5s]">// hello world, I'm<span className="animate-blink">|</span></p>
           <h1 className="mt-4 animate-rise font-display text-6xl font-black leading-[0.9] tracking-tight [animation-delay:2.6s] sm:text-7xl lg:text-8xl">
