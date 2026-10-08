@@ -125,7 +125,7 @@ function AccentToggle() {
     if (saved > 0) setI(saved);
   }, []);
   useEffect(() => {
-    document.documentElement.dataset.accent = accents[i];
+    document.documentElement.dataset["accent"] = accents[i];
     localStorage.setItem("accent", accents[i]!);
   }, [i]);
   return (
