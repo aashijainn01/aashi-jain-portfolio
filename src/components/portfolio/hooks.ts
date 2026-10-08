@@ -18,11 +18,14 @@ export function useInView<T extends Element>(threshold = 0.2) {
 /** Adds `.in` to every `.reveal*` element once visible. */
 export function useRevealAll() {
   useEffect(() => {
-    const els = document.querySelectorAll(".reveal, .reveal-left, .reveal-right");
+    const sel = ".reveal:not(.in), .reveal-left:not(.in), .reveal-right:not(.in)";
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => { if (e?.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-    }, { threshold: 0.15 });
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+    }, { threshold: 0.05 });
+    const scan = () => document.querySelectorAll(sel).forEach((el) => io.observe(el));
+    scan();
+    const mo = new MutationObserver(scan);
+    mo.observe(document.body, { childList: true, subtree: true });
+    return () => { io.disconnect(); mo.disconnect(); };
   }, []);
 }
