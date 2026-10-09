@@ -1,3 +1,17 @@
+import codesageImage from "@/assets/codesage.jpg";
+import medisphereImage from "@/assets/medisphere.jpg";
+import propredictImage from "@/assets/propredict.jpg";
+import virtualMouseImage from "@/assets/virtual-mouse.jpg";
+import audioAgentImage from "@/assets/audio-agent.jpg";
+
+export const projectImages: Record<string, { src: string; alt: string }> = {
+  CodeSage: { src: codesageImage, alt: "AI code review illustrated with a laptop, magnifying lens and connected Git branches" },
+  Medisphere: { src: medisphereImage, alt: "Hospital connected to patient records and appointment scheduling modules" },
+  "ProPredict AI": { src: propredictImage, alt: "Modern house with property price charts and a location pin" },
+  "AI Virtual Mouse": { src: virtualMouseImage, alt: "Hand gesture tracking controlling a glowing mouse pointer" },
+  "Audio Customer Support Agent": { src: audioAgentImage, alt: "Customer support headset with an AI audio waveform" },
+};
+
 // All editable portfolio content lives here.
 export const profile = {
   first: "Aashi",
