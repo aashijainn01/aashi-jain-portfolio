@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type MouseEvent as RME } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, BookOpen, Brain, Check, Cloud, Code, Cpu, Download, ExternalLink, GraduationCap, Loader2, Mail, Medal, Send, Trophy } from "lucide-react";
-import { achievements, bioCards, categories, constellations, education, heroStats, nav, profile, projects, stats } from "@/data/portfolio";
+import { achievements, bioCards, categories, constellations, education, heroStats, nav, profile, projectImages, projects, stats } from "@/data/portfolio";
 import { GithubIcon, LinkedinIcon } from "./icons";
 import { fireConfetti, useInView, useMagnetic, useScramble } from "./hooks";
 
@@ -282,17 +282,19 @@ export function Skills() {
 /* ---------------- PROJECTS ---------------- */
 function ProjectCard({ p }: { p: (typeof projects)[number] }) {
   const ref = useRef<HTMLDivElement>(null);
+  const image = projectImages[p.title];
   const move = (e: RME) => {
-    const el = ref.current!; const r = el.getBoundingClientRect();
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
     el.style.transform = `perspective(800px) rotateX(${(0.5 - y) * 12}deg) rotateY(${(x - 0.5) * 12}deg)`;
     el.style.setProperty("--mx", `${x * 100}%`); el.style.setProperty("--my", `${y * 100}%`);
   };
   return (
-    <div ref={ref} data-cursor="view" onMouseMove={move} onMouseLeave={() => { ref.current!.style.transform = ""; }} className="holo glass glass-border flex h-full flex-col overflow-hidden rounded-3xl hover:shadow-glow-soft">
-      <div className="relative h-48 overflow-hidden" style={{ background: `linear-gradient(135deg, ${p.grad[0]}, ${p.grad[1]})` }}>
-        <div className="blueprint absolute inset-0 opacity-60" />
-        <span className="absolute bottom-4 right-5 font-display text-7xl font-black text-primary-foreground/20">{p.title.split(" ").map((w) => w[0]).join("").slice(0, 2)}</span>
+    <div ref={ref} data-cursor="view" onMouseMove={move} onMouseLeave={() => { if (ref.current) ref.current.style.transform = ""; }} className="group holo glass glass-border flex h-full flex-col overflow-hidden rounded-3xl hover:shadow-glow-soft">
+      <div className="relative h-48 shrink-0 overflow-hidden bg-background">
+        {image && <img src={image.src} alt={image.alt} loading="lazy" width={1280} height={768} className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transform-none" />}
         <div className="absolute left-4 top-4 flex gap-2">
           <span className="rounded-full bg-background/60 px-3 py-1 font-mono text-[10px] backdrop-blur">{p.label}</span>
           {p.featured && <span className="rounded-full bg-background/80 px-3 py-1 font-mono text-[10px] font-bold text-code-yellow">★ FEATURED</span>}
