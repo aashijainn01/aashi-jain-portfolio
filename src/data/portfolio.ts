@@ -24,7 +24,7 @@ export const profile = {
   phone: "9074428080",
   github: "https://github.com/aashijainn01",
   linkedin: "https://linkedin.com/in/aashi-jain-b2500a329",
-  cv: "#",
+  cv: "/Aashi_Jain_Resume.pdf",
 };
 
 export const heroStats = ["10 Public Repos", "Active Since Sep 2024", "4 Cloud Certifications"];

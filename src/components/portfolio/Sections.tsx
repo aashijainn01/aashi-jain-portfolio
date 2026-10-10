@@ -406,10 +406,29 @@ export function Contact() {
   const [f, setF] = useState({ name: "", email: "", subject: "", message: "" });
   const [state, setState] = useState<"idle" | "sending" | "sent">("idle");
   const set = (k: keyof typeof f) => (v: string) => setF({ ...f, [k]: v });
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setState("sending");
-    setTimeout(() => { setState("sent"); fireConfetti(1500); setF({ name: "", email: "", subject: "", message: "" }); setTimeout(() => setState("idle"), 3500); }, 1500);
+    try {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
+      const response = await fetch(`${API_URL}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(f),
+      });
+      if (response.ok) {
+        setState("sent");
+        fireConfetti(1500);
+        setF({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setState("idle"), 3500);
+      } else {
+        console.error("Failed to send message");
+        setState("idle");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      setState("idle");
+    }
   };
   const items = [
     { href: `mailto:${profile.email}`, label: profile.email, Icon: Mail },
@@ -431,7 +450,7 @@ export function Contact() {
             </span>
             <div className="mt-8 space-y-3">
               {items.map(({ href, label, Icon }) => (
-                <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="group flex items-center gap-4 rounded-xl p-3 transition-all hover:translate-x-2 hover:bg-accent">
+                <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined} className="group flex items-center gap-4 rounded-xl p-3 transition-all hover:translate-x-2 hover:bg-accent">
                   <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand text-primary-foreground"><Icon className="h-4 w-4" /></span>
                   <span className="break-all text-sm">{label}</span>
                 </a>
