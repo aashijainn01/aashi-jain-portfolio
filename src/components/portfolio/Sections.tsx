@@ -493,7 +493,7 @@ export function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 text-sm text-muted-foreground md:flex-row">
         <p><span className="font-display font-bold text-foreground">{profile.first} {profile.last}</span> · © 2026</p>
         <nav className="flex gap-6">{links.map(([l, h]) => <a key={h} href={`#${h}`} className="link-underline hover:text-foreground">{l}</a>)}</nav>
-        <p>Crafted with Java ☕ + React ⚛️ + ❤️</p>
+        <p>Crafted with TypeScript 💙 + React ⚛️ + ❤️</p>
       </div>
       <span className="sr-only">{nav.join(", ")}</span>
     </footer>
